@@ -6,8 +6,10 @@ select plan(2);
 \set repo1ID '00000000-0000-0000-0000-000000000001'
 \set package1ID '00000000-0000-0000-0000-000000000001'
 \set package2ID '00000000-0000-0000-0000-000000000002'
+\set package3ID '00000000-0000-0000-0000-000000000003'
 \set image1ID '00000000-0000-0000-0000-000000000001'
 \set image2ID '00000000-0000-0000-0000-000000000002'
+\set image3ID '00000000-0000-0000-0000-000000000003'
 
 -- No packages at this point
 select is(
@@ -125,6 +127,46 @@ insert into snapshot (
     '0.0.9',
     '12.0.0',
     'digest-package2-0.0.9',
+    'readme',
+    '{"link1": "https://link1", "link2": "https://link2"}'
+);
+insert into package (
+    package_id,
+    name,
+    display_name,
+    description,
+    home_url,
+    logo_image_id,
+    keywords,
+    deprecated,
+    latest_version,
+    package_kind_id,
+    chart_repository_id
+) values (
+    :'package3ID',
+    'package3',
+    'Package 3',
+    'description',
+    'home_url',
+    :'image3ID',
+    '{"kw1", "kw2"}',
+    true,
+    '1.0.0',
+    0,
+    :'repo1ID'
+);
+insert into snapshot (
+    package_id,
+    version,
+    app_version,
+    digest,
+    readme,
+    links
+) values (
+    :'package3ID',
+    '1.0.0',
+    '12.1.0',
+    'digest-package3-1.0.0',
     'readme',
     '{"link1": "https://link1", "link2": "https://link2"}'
 );
